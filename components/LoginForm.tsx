@@ -4,9 +4,12 @@ import { useRouter } from 'next/navigation'
 
 const LoginForm = () => {
 
+    const [loading, setLoading] = React.useState(false)
+
     const router = useRouter()
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        setLoading(true)
         e.preventDefault()
         const username = e.currentTarget.username.value
         if (username) {
@@ -19,8 +22,8 @@ const LoginForm = () => {
             })
             const data = await res.json()
             localStorage.setItem('username', data.username)
-
             router.push('/chat')
+            setLoading(false)
         }
     }
 
@@ -30,7 +33,7 @@ const LoginForm = () => {
             <input type="text" className='border px-3 py-1 rounded' placeholder='johndoe' name="username" id="username" required />
             <button
                 className='bg-slate-800 mt-2 hover:outline-3 hover:outline-slate-400 outline text-slate-50 rounded px-3 py-1'>
-                Start Chat
+                {loading ? 'Starting...' : 'Start Chat'}
             </button>
         </form>
     )
