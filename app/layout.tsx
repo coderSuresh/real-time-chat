@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import Header from '@/components/Header'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +18,10 @@ const RootLayout = ({ children }: Props) => {
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </head>
       <body>
-        {children}
+        <Header />
+        <main className='flex mt-10 flex-col items-center justify-center flex-1 px-20 text-center'>
+          {children}
+        </main>
       </body>
     </html>
   )
