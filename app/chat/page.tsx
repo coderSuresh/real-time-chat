@@ -1,12 +1,18 @@
 'use client'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 
 const Chat = () => {
+
+  const router = useRouter()
 
   const [username, setUsername] = React.useState('')
 
   const getUsername = () => {
     const username = localStorage.getItem('username') ? JSON.parse(localStorage.getItem('username')!) : 'guest'
+
+    if(username === 'guest') router.push('/')
+
     setUsername(username.username)
   }
 
