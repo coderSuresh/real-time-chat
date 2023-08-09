@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Header from '@/components/Header'
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const Home = () => {
 
@@ -36,16 +36,14 @@ const Home = () => {
           A simple chat app built with Next.js, Tailwind CSS and SocketIO
         </p>
 
-        <div>
-          <form className='flex flex-col mt-10 gap-y-2' onSubmit={handleFormSubmit} action="#" method='post'>
-            <label htmlFor="username">Username</label>
-            <input type="text" className='border px-3 py-1 rounded' placeholder='johndoe' name="username" id="username" required />
-            <button
-              className='bg-slate-800 mt-2 hover:outline-3 hover:outline-slate-400 outline text-slate-50 rounded px-3 py-1'>
-              Start Chat
-            </button>
-          </form>
-        </div>
+        <form className='flex flex-col mt-10 gap-y-2' onSubmit={handleFormSubmit} action="#" method='post'>
+          <label htmlFor="username">Username</label>
+          <input type="text" className='border px-3 py-1 rounded' placeholder='johndoe' name="username" id="username" required />
+          <button
+            className='bg-slate-800 mt-2 hover:outline-3 hover:outline-slate-400 outline text-slate-50 rounded px-3 py-1'>
+            Start Chat
+          </button>
+        </form>
 
       </main>
     </>
