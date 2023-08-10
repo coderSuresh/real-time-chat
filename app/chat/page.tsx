@@ -23,10 +23,7 @@ const Chat = () => {
 
   return (
     <>
-      <Header />
-      <h1 className='text-3xl font-bold text-slate-800'>
-        Welcome <span className='text-blue-600'>{username}!</span>
-      </h1>
+      <Header username={username} />
     </>
   )
 }
