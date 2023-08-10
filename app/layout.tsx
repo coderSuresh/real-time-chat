@@ -18,10 +18,7 @@ const RootLayout = ({ children }: Props) => {
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </head>
       <body>
-        <Header />
-        <main className='flex mt-10 flex-col items-center justify-center flex-1 px-20 text-center'>
-          {children}
-        </main>
+        {children}
       </body>
     </html>
   )

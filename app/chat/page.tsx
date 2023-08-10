@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import Header from '@/components/Header'
 
 const Chat = () => {
 
@@ -22,6 +23,7 @@ const Chat = () => {
 
   return (
     <>
+      <Header />
       <h1 className='text-3xl font-bold text-slate-800'>
         Welcome <span className='text-blue-600'>{username}!</span>
       </h1>
