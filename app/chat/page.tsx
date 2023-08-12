@@ -2,6 +2,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
+import MessageCard from '@/components/MessageCard'
 
 const Chat = () => {
 
@@ -27,7 +28,7 @@ const Chat = () => {
 
       <main>
         <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)]'>
-          here will be chat
+          <MessageCard username={username} />
         </div>
         <div className='flex m-5 bg-white border rounded'>
           <textarea rows={2} placeholder='Type your message' className='border-none outline-none resize-none border-gray-300 p-2 w-full' />
