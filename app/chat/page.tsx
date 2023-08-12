@@ -14,7 +14,7 @@ const Chat = () => {
 
     if(username === 'guest') router.push('/')
 
-    setUsername(username.username)
+    setUsername(username)
   }
 
   React.useEffect(() => {

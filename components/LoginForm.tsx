@@ -13,16 +13,7 @@ const LoginForm = () => {
         e.preventDefault()
         const username = e.currentTarget.username.value
         if (username) {
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username })
-            })
-            const data = await res.json()
-
-            sessionStorage.setItem('username', JSON.stringify(data.username))
+            sessionStorage.setItem('username', JSON.stringify(username))
             router.push('/chat')
             setLoading(false)
         }
