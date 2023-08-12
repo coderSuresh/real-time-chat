@@ -16,7 +16,7 @@ const Header = ({ username }: Props) => {
     }
 
     return (
-        <header className='px-10 py-5 shadow flex items-center justify-between'>
+        <header className='px-10 py-5 bg-white shadow flex items-center justify-between'>
             <h1
                 className='font-bold text-xl text-slate-800'>
                 CHAT<span className='text-blue-600'>APP</span>

@@ -17,7 +17,7 @@ const RootLayout = ({ children }: Props) => {
       <head>
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </head>
-      <body>
+      <body className='bg-slate-100'>
         {children}
       </body>
     </html>
