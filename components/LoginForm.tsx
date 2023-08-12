@@ -21,7 +21,8 @@ const LoginForm = () => {
                 body: JSON.stringify({ username })
             })
             const data = await res.json()
-            localStorage.setItem('username', JSON.stringify(data.username))
+
+            sessionStorage.setItem('username', JSON.stringify(data.username))
             router.push('/chat')
             setLoading(false)
         }

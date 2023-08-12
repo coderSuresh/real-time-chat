@@ -10,7 +10,7 @@ const Chat = () => {
   const [username, setUsername] = React.useState('')
 
   const getUsername = () => {
-    const username = localStorage.getItem('username') ? JSON.parse(localStorage.getItem('username')!) : 'guest'
+    const username = sessionStorage.getItem('username') ? JSON.parse(sessionStorage.getItem('username')!) : 'guest'
 
     if(username === 'guest') router.push('/')
 

@@ -11,7 +11,7 @@ const Header = ({ username }: Props) => {
     const router = useRouter()
 
     const logout = () => {
-        localStorage.removeItem('username')
+        sessionStorage.removeItem('username')
         router.push('/')
     }
 
