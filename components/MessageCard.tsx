@@ -1,5 +1,5 @@
 import React from 'react'
-import { createCircularAvatar } from '@/components/circularAvatar'
+import { CircularAvatar } from '@/components/CircularAvatar'
 
 type Props = {
     username?: String
@@ -8,7 +8,7 @@ type Props = {
 const MessageCard = ({ username }: Props) => {
 
     const firstLetter = username?.charAt(0)
-    const avatar = createCircularAvatar(firstLetter)
+    const avatar = CircularAvatar(firstLetter)
 
     return (
 
