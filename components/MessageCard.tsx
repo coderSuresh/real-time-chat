@@ -1,5 +1,5 @@
 import React from 'react'
-import { createCircularAvatar } from '@/utils/circularAvatar'
+import { createCircularAvatar } from '@/components/circularAvatar'
 
 type Props = {
     username?: String
