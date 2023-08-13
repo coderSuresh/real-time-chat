@@ -1,4 +1,5 @@
 import React from 'react'
+import { createCircularAvatar } from '@/utils/circularAvatar'
 
 type Props = {
     username?: String
@@ -6,19 +7,8 @@ type Props = {
 
 const MessageCard = ({ username }: Props) => {
 
-    // create circular avatar from first letter of the username
     const firstLetter = username?.charAt(0)
-
-    const createCircularAvatar = (letter?: String) => {
-        return (
-            <div
-                className='rounded-full w-8 h-8 flex items-center justify-center font-semibold text-xl bg-slate-800 text-slate-50'>
-                {letter?.toUpperCase()}
-            </div>
-        )
-    }
-
-    const avatar = createCircularAvatar('P')
+    const avatar = createCircularAvatar(firstLetter)
 
     return (
 
