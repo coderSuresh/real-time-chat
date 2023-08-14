@@ -7,16 +7,13 @@ type Props = {
 
 const MessageCard = ({ username }: Props) => {
 
-    const firstLetter = username?.charAt(0)
-    const avatar = CircularAvatar(firstLetter)
-
     return (
 
         <div className='flex flex-col'>
             <div className="left_message self-start max-w-[60%]">
                 <div className='flex gap-3 items-end'>
                     <div>
-                        {avatar}
+                        {CircularAvatar(username)}
                     </div>
                     <div>
                         <p className='text-slate-500 px-3 text-sm'>Prabin</p>
@@ -28,7 +25,7 @@ const MessageCard = ({ username }: Props) => {
             <div className="right_message self-end max-w-[60%]">
                 <div className='flex flex-row-reverse gap-3 items-end'>
                     <div>
-                        {avatar}
+                        {CircularAvatar(username)}
                     </div>
                     <div className='flex flex-col'>
                         <p className='text-slate-500 px-3 text-sm self-end'>Prabin</p>
