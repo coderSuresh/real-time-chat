@@ -22,6 +22,10 @@ io.on('connection', (socket) => {
     socket.on('join', (username) => {
         socket.broadcast.emit('welcome', `${username} has joined the chat`);
     })
+
+    socket.on('message', ({username, message}) => {
+        socket.broadcast.emit('message', {username, message});
+    })
 });
 
 server.listen(PORT, () => {

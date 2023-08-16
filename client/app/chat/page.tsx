@@ -10,6 +10,7 @@ const Chat = () => {
   const router = useRouter()
 
   const [username, setUsername] = React.useState('')
+  const [message, setMessage] = React.useState('')
 
   const connectToSocket = (username: String) => {
     const socket = io('http://localhost:5000')
@@ -31,9 +32,23 @@ const Chat = () => {
     setUsername(username)
   }
 
+  io('http://localhost:5000').on('message', ({ username, message }) => {
+    console.log(`${username} : ${message}`)
+  })
+
   React.useEffect(() => {
     getUsername()
   }, [])
+
+  const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    const message = e.currentTarget.querySelector('textarea')!.value
+
+    io('http://localhost:5000').emit('message', { username, message })
+
+    e.currentTarget.querySelector('textarea')!.value = ''
+  }
 
   return (
     <>
@@ -43,10 +58,10 @@ const Chat = () => {
         <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)]'>
           <MessageCard username={username} />
         </div>
-        <div className='flex m-5 bg-white border rounded'>
+        <form action="#" onSubmit={sendMessage} className='flex m-5 bg-white border rounded'>
           <textarea rows={2} placeholder='Type your message' className='border-none outline-none resize-none border-gray-300 p-2 w-full' />
-          <button type='submit' className='bg-slate-800 p-2 text-white font-medium'>Send</button>
-        </div>
+          <button className='bg-slate-800 p-2 text-white font-medium'>Send</button>
+        </form>
       </main>
     </>
   )
