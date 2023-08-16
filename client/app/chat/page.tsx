@@ -18,7 +18,15 @@ const Chat = () => {
     setUsername(username)
   }
 
+  const socketTest = () => {
+    fetch('http://localhost:5000/chat')
+      .then(res => res.text())
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+  }
+
   React.useEffect(() => {
+    socketTest();
     getUsername()
   }, [])
 
