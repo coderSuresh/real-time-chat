@@ -3,6 +3,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import MessageCard from '@/components/MessageCard'
+import io from 'socket.io-client'
 
 const Chat = () => {
 
@@ -19,10 +20,11 @@ const Chat = () => {
   }
 
   const socketTest = () => {
-    fetch('http://localhost:5000/chat')
-      .then(res => res.text())
-      .then(data => console.log(data))
-      .catch(err => console.log(err))
+    
+    const socket = io('http://localhost:5000')
+    socket.on('connect', () => {
+      console.log('connected')
+    })
   }
 
   React.useEffect(() => {
