@@ -11,24 +11,27 @@ const Chat = () => {
 
   const [username, setUsername] = React.useState('')
 
+  const connectToSocket = (username: String) => {
+    const socket = io('http://localhost:5000')
+
+    socket.emit('join', username)
+
+    socket.on('welcome', (data) => {
+      console.log(data)
+    })
+  }
+
   const getUsername = () => {
     const username = sessionStorage.getItem('username') ? JSON.parse(sessionStorage.getItem('username')!) : 'guest'
 
-    if(username === 'guest') router.push('/')
+    if (username === 'guest') router.push('/')
+
+    connectToSocket(username)
 
     setUsername(username)
   }
 
-  const socketTest = () => {
-    
-    const socket = io('http://localhost:5000')
-    socket.on('connect', () => {
-      console.log('connected')
-    })
-  }
-
   React.useEffect(() => {
-    socketTest();
     getUsername()
   }, [])
 
@@ -44,7 +47,7 @@ const Chat = () => {
           <textarea rows={2} placeholder='Type your message' className='border-none outline-none resize-none border-gray-300 p-2 w-full' />
           <button type='submit' className='bg-slate-800 p-2 text-white font-medium'>Send</button>
         </div>
-     </main>
+      </main>
     </>
   )
 }

@@ -19,8 +19,9 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
-    // Handle socket events here
+    socket.on('join', (username) => {
+        socket.broadcast.emit('welcome', `${username} has joined the chat`);
+    })
 });
 
 server.listen(PORT, () => {
