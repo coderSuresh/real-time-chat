@@ -16,9 +16,6 @@ const RootLayout = ({ children }: Props) => {
     <html>
       <head>
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
-        <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
-          integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
-        ></script>
       </head>
       <body className='bg-slate-100'>
         {children}
