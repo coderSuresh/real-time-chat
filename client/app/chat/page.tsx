@@ -10,7 +10,7 @@ const Chat = () => {
   const router = useRouter()
 
   const [username, setUsername] = React.useState('')
-  const [message, setMessage] = React.useState('')
+  const [messages, setMessages] = React.useState([{username: '', message: ''}])
 
   const connectToSocket = (username: String) => {
     const socket = io('http://localhost:5000')
@@ -18,7 +18,7 @@ const Chat = () => {
     socket.emit('join', username)
 
     socket.on('welcome', (data) => {
-      console.log(data)
+      // console.log(data)
     })
   }
 
@@ -33,7 +33,9 @@ const Chat = () => {
   }
 
   io('http://localhost:5000').on('message', ({ username, message }) => {
-    console.log(`${username} : ${message}`)
+    setMessages((prevMessage) => {
+      return [...prevMessage, { username, message }]
+    })
   })
 
   React.useEffect(() => {
@@ -55,8 +57,8 @@ const Chat = () => {
       <Header username={username} />
 
       <main>
-        <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)]'>
-          <MessageCard username={username} />
+        <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)] overflow-auto'>
+          <MessageCard myUsername={username} messages={messages} />
         </div>
         <form action="#" onSubmit={sendMessage} className='flex m-5 bg-white border rounded'>
           <textarea rows={2} placeholder='Type your message' className='border-none outline-none resize-none border-gray-300 p-2 w-full' />
