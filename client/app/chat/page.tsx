@@ -32,11 +32,11 @@ const Chat = () => {
     setUsername(username)
   }
 
-  io('http://localhost:5000').on('message', ({ username, message }) => {
-    setMessages((prevMessage) => {
-      return [...prevMessage, { username, message }]
+  React.useEffect(() => {
+    io('http://localhost:5000').on('message', (data) => {
+      setMessages((messages) => [...messages, data])
     })
-  })
+  }, [])
 
   React.useEffect(() => {
     getUsername()

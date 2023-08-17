@@ -2,8 +2,8 @@ import React from 'react'
 import { CircularAvatar } from './CircularAvatar'
 
 type Props = {
-    username: String;
-    message: String;
+    username: string;
+    message: string;
 }
 
 const LeftMessage = ({ username, message }: Props) => {
