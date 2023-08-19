@@ -14,8 +14,8 @@ const MessageCard = ({ myUsername, messages }: Props) => {
 
     const renderMessage = () => {
         return messages.map((message, i) => {
-          
-            if(!message.username || !message.message) return null
+
+            if (!message.username || !message.message) return null
 
             if (message.username === myUsername) {
                 return <RightMessage key={i} username={message.username} message={message.message} />
@@ -26,11 +26,9 @@ const MessageCard = ({ myUsername, messages }: Props) => {
     }
 
     return (
-
-        <div className='flex flex-col'>
+        <>
             {renderMessage()}
-        </div>
-
+        </>
     )
 }
 

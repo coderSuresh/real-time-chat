@@ -13,6 +13,7 @@
     "@types/react": "18.2.19",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "bufferutil": "^4.0.7",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.13",
     "next": "13.4.13",
@@ -21,6 +22,7 @@
     "react-dom": "18.2.0",
     "socket.io-client": "^4.7.2",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "utf-8-validate": "^5.0.10"
   }
 }

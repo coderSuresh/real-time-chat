@@ -1,20 +1,21 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import io from 'socket.io-client'
 import Header from '@/components/Header'
 import MessageCard from '@/components/MessageCard'
-import io from 'socket.io-client'
 
 const Chat = () => {
 
   const router = useRouter()
 
-  const [username, setUsername] = React.useState('')
-  const [messages, setMessages] = React.useState([{username: '', message: ''}])
+  const [username, setUsername] = useState('')
+  const [messages, setMessages] = useState([{ username: '', message: '' }])
+
+  const SERVER_URL = 'http://localhost:5000'
+  const socket = io(SERVER_URL)
 
   const connectToSocket = (username: String) => {
-    const socket = io('http://localhost:5000')
-
     socket.emit('join', username)
 
     socket.on('welcome', (data) => {
@@ -32,22 +33,33 @@ const Chat = () => {
     setUsername(username)
   }
 
-  React.useEffect(() => {
-    io('http://localhost:5000').on('message', (data) => {
-      setMessages((messages) => [...messages, data])
+  useEffect(() => {
+    getUsername()
+
+    socket.on('message', (data) => {
+      setMessages((prevMessages) => [...prevMessages, data])
     })
+
+    return () => {
+      socket.off('message')
+    }
   }, [])
 
-  React.useEffect(() => {
-    getUsername()
-  }, [])
+  useEffect(() => {
+    const messageContainer = document.querySelector('.message_container')
+    const lastMessage = messageContainer?.lastElementChild
+
+    if (lastMessage) {
+      lastMessage.scrollIntoView()
+    }
+  }, [messages])
 
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const message = e.currentTarget.querySelector('textarea')!.value
 
-    io('http://localhost:5000').emit('message', { username, message })
+    socket.emit('message', { username, message })
 
     e.currentTarget.querySelector('textarea')!.value = ''
   }
@@ -58,7 +70,9 @@ const Chat = () => {
 
       <main>
         <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)] overflow-auto'>
-          <MessageCard myUsername={username} messages={messages} />
+          <div className='message_container flex flex-col'>
+            <MessageCard myUsername={username} messages={messages} />
+          </div>
         </div>
         <form action="#" onSubmit={sendMessage} className='flex m-5 bg-white border rounded'>
           <textarea rows={2} placeholder='Type your message' className='border-none outline-none resize-none border-gray-300 p-2 w-full' />
