@@ -31,6 +31,9 @@ const MessageCard = ({ myUsername, messages, newUserJoinedMessage }: Props) => {
 
     }, [messages, newUserJoinedMessage])
 
+    // TODO: show new user joined message more effectively
+    // show message more effectively
+
     // remove duplicate messages
     React.useEffect(() => {
         setMessageComponents((prevMessages: any) => {
