@@ -11,16 +11,13 @@ const Chat = () => {
 
   const [username, setUsername] = useState('')
   const [messages, setMessages] = useState([{ username: '', message: '' }])
+  const [newUserJoinedMessage, setnewUserJoinedMessage] = useState('')
 
   const SERVER_URL = 'http://localhost:5000'
   const socket = io(SERVER_URL)
 
   const connectToSocket = (username: String) => {
     socket.emit('join', username)
-
-    socket.on('welcome', (data) => {
-      // console.log(data)
-    })
   }
 
   const getUsername = () => {
@@ -52,6 +49,11 @@ const Chat = () => {
     if (lastMessage) {
       lastMessage.scrollIntoView()
     }
+
+    socket.on('welcome', (data) => {
+      setnewUserJoinedMessage(() => data)
+    })
+
   }, [messages])
 
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +73,7 @@ const Chat = () => {
       <main>
         <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)] overflow-auto'>
           <div className='message_container flex flex-col'>
-            <MessageCard myUsername={username} messages={messages} />
+            <MessageCard newUserJoinedMessage={newUserJoinedMessage} myUsername={username} messages={messages} />
           </div>
         </div>
         <form action="#" onSubmit={sendMessage} className='flex m-5 bg-white border rounded'>

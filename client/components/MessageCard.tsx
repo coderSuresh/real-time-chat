@@ -5,31 +5,63 @@ import RightMessage from './RightMessage'
 type Props = {
     myUsername: string,
     messages: {
-        username: string,
+        username: string
         message: string
-    }[]
+    }[],
+    newUserJoinedMessage: string
 }
 
-const MessageCard = ({ myUsername, messages }: Props) => {
+const MessageCard = ({ myUsername, messages, newUserJoinedMessage }: Props) => {
 
+    const [messageComponents, setMessageComponents] = React.useState<any>([])
+
+    React.useEffect(() => {
+        renderMessage()
+
+        if (newUserJoinedMessage) {
+            setMessageComponents((prevMessages: any) => [
+                ...prevMessages,
+                <div className="text-center text-gray-500 text-sm" key={newUserJoinedMessage}>
+                    {newUserJoinedMessage}
+                </div>
+            ])
+        }
+
+        console.log('messageComponents: ', messageComponents)
+
+    }, [messages, newUserJoinedMessage])
+
+    // remove duplicate messages
+    React.useEffect(() => {
+        setMessageComponents((prevMessages: any) => {
+            let newMessages = prevMessages.filter((message: any, i: number) => {
+                return prevMessages.findIndex((m: any) => m.key === message.key) === i
+            })
+            return newMessages
+        })
+    }, [messageComponents])
+   
     const renderMessage = () => {
-        return messages.map((message, i) => {
 
-            if (!message.username || !message.message) return null
+        messages.forEach((message, i) => {
+
+            if (!message.username || !message.message) return
 
             if (message.username === myUsername) {
-                return <RightMessage key={i} username={message.username} message={message.message} />
+                setMessageComponents((prevMessages: any) => [
+                    ...prevMessages,
+                    <RightMessage key={message.username + i} username={message.username} message={message.message} />
+                ])
             } else {
-                return <LeftMessage key={i} username={message.username} message={message.message} />
+                setMessageComponents((prevMessages: any) => [
+                    ...prevMessages,
+                    <LeftMessage key={message.username + i} username={message.username} message={message.message} />
+                ])
             }
         })
     }
 
-    return (
-        <>
-            {renderMessage()}
-        </>
-    )
+    return <>{messageComponents}</>
 }
 
 export default MessageCard
