@@ -11,6 +11,8 @@ type Props = {
     newUserJoinedMessage: string
 }
 
+// TODO: Fix infinite loop here
+
 const MessageCard = ({ myUsername, messages, newUserJoinedMessage }: Props) => {
 
     const [messageComponents, setMessageComponents] = React.useState<any>([])
