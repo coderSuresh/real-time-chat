@@ -11,6 +11,7 @@ const Chat = () => {
 
   const [username, setUsername] = useState('')
   const [messages, setMessages] = useState([{ username: '', message: '' }])
+  const messageRef = React.useRef<HTMLDivElement>(null)
 
   const SERVER_URL = 'http://localhost:5000'
   const socket = io(SERVER_URL)
@@ -42,11 +43,14 @@ const Chat = () => {
   }, [])
 
   useEffect(() => {
-    const messageContainer = document.querySelector('.message_container')
-    const lastMessage = messageContainer?.lastElementChild
+    if (messageRef.current) {
+      setTimeout(() => {
+        const lastMessage = messageRef.current?.lastElementChild
 
-    if (lastMessage) {
-      lastMessage.scrollIntoView()
+        if (lastMessage) {
+          lastMessage.scrollIntoView()
+        }
+      }, 100);
     }
   }, [messages])
 
@@ -65,8 +69,8 @@ const Chat = () => {
       <Header username={username} />
 
       <main>
-        <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)] overflow-auto'>
-          <div className='message_container flex flex-col'>
+        <div className='bg-white m-5 rounded md:p-10 p-5 h-[calc(100vh-200px)] overflow-y-auto'>
+          <div ref={messageRef} className='flex flex-col'>
             <MessageCard myUsername={username} messages={messages} />
           </div>
         </div>
