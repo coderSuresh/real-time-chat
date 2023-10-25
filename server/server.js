@@ -20,7 +20,7 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
     socket.on('join', (username) => {
-        socket.broadcast.emit('welcome', `${username} has joined the chat`);
+        socket.broadcast.emit('message', {message: `${username} has joined the chat`, username, type: 'join'});
     })
 
     socket.on('message', ({username, message}) => {

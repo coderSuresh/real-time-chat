@@ -1,13 +1,15 @@
 type Props = {
     myUsername: string,
     messages: {
-        username: string
-        message: string
+        username: string,
+        message: string,
+        type?: string,
     }[],
-    newUserJoinedMessage?: string
+    newUserJoinedMessage?: string,
 }
 
 type Message = {
-    username: string
-    message: string
+    username: string,
+    message: string,
+    type?: string,
 }[]
