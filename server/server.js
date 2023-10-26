@@ -12,7 +12,7 @@ app.use(cors());
 
 const io = new Server(server, {
     cors: {
-        origin: 'https://real-time-chat-lyart.vercel.app',
+        origin: 'https://chat-codersuresh.vercel.app',
         methods: ['GET', 'POST'],
         credentials: true,
     },
