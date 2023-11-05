@@ -12,6 +12,7 @@ const Chat = () => {
   const [username, setUsername] = useState('')
   const [messages, setMessages] = useState<{ username: string, message: string }[]>([])
   const messageRef = React.useRef<HTMLDivElement>(null)
+  const messageContentRef = React.useRef<HTMLInputElement>(null)
 
   const SERVER_URL = 'https://real-time-chat-7gnu.onrender.com'
   const socket = io(SERVER_URL)
@@ -67,11 +68,9 @@ const Chat = () => {
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const message = e.currentTarget.querySelector('textarea')!.value
-
+    const message = messageContentRef.current?.value
     socket.emit('message', { username, message })
-
-    e.currentTarget.querySelector('textarea')!.value = ''
+    messageContentRef.current!.value = ''
   }
 
   return (
@@ -85,7 +84,7 @@ const Chat = () => {
           </div>
         </div>
         <form action="#" onSubmit={sendMessage} className='flex m-5 bg-white border rounded'>
-          <textarea rows={2} placeholder='Type your message' className='border-none outline-none resize-none border-gray-300 p-2 w-full' />
+          <input ref={messageContentRef} placeholder='Type your message' className='border-none outline-none h-16 border-gray-300 p-2 w-full' />
           <button className='bg-slate-800 p-2 text-white font-medium'>Send</button>
         </form>
       </main>
