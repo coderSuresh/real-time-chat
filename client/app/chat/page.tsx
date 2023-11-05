@@ -13,8 +13,7 @@ const Chat = () => {
   const [messages, setMessages] = useState<{ username: string, message: string }[]>([])
   const messageRef = React.useRef<HTMLDivElement>(null)
 
-  // const SERVER_URL = 'https://real-time-chat-7gnu.onrender.com'
-  const SERVER_URL = 'http://localhost:5000'
+  const SERVER_URL = 'https://real-time-chat-7gnu.onrender.com'
   const socket = io(SERVER_URL)
 
   const connectToSocket = (username: String) => {
