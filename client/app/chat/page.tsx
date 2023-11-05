@@ -33,8 +33,15 @@ const Chat = () => {
   useEffect(() => {
     getUsername()
 
+    const msgFromSessionStorage = sessionStorage.getItem('messages')
+
+    if (msgFromSessionStorage) {
+      setMessages(JSON.parse(msgFromSessionStorage))
+    }
+
     socket.on('message', (data) => {
       setMessages((prevMessages) => [...prevMessages, data])
+      sessionStorage.setItem('messages', JSON.stringify(messages))
     })
 
     return () => {
