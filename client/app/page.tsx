@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <main className='w-fit max-w-lg lg:max-w-full mx-auto my-10 text-center'>
+      <main className='w-fit max-w-lg lg:max-w-full mx-auto my-10 px-5 text-center'>
         <h1 className='text-3xl font-bold text-slate-800'>
           Welcome to <span className='text-blue-600'>ChatApp!</span>
         </h1>
