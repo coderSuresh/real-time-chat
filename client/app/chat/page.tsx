@@ -10,10 +10,11 @@ const Chat = () => {
   const router = useRouter()
 
   const [username, setUsername] = useState('')
-  const [messages, setMessages] = useState([{ username: '', message: '' }])
+  const [messages, setMessages] = useState<{ username: string, message: string }[]>([])
   const messageRef = React.useRef<HTMLDivElement>(null)
 
-  const SERVER_URL = 'https://real-time-chat-7gnu.onrender.com'
+  // const SERVER_URL = 'https://real-time-chat-7gnu.onrender.com'
+  const SERVER_URL = 'http://localhost:5000'
   const socket = io(SERVER_URL)
 
   const connectToSocket = (username: String) => {
@@ -41,7 +42,6 @@ const Chat = () => {
 
     socket.on('message', (data) => {
       setMessages((prevMessages) => [...prevMessages, data])
-      sessionStorage.setItem('messages', JSON.stringify(messages))
     })
 
     return () => {
@@ -50,6 +50,10 @@ const Chat = () => {
   }, [])
 
   useEffect(() => {
+
+    if (messages.length > 0)
+      sessionStorage.setItem('messages', JSON.stringify(messages))
+
     if (messageRef.current) {
       setTimeout(() => {
         const lastMessage = messageRef.current?.lastElementChild
