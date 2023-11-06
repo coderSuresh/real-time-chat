@@ -15,6 +15,7 @@ const Chat = () => {
   const messageContentRef = React.useRef<HTMLInputElement>(null)
 
   const SERVER_URL = 'https://real-time-chat-7gnu.onrender.com'
+  // const SERVER_URL = 'http://localhost:5000'
   const socket = io(SERVER_URL)
 
   const connectToSocket = (username: String) => {

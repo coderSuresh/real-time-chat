@@ -12,19 +12,19 @@ const MessageCard = ({ myUsername, messages }: Props) => {
     const renderMessage = () => {
         const newMessageComponents = [] as React.ReactNode[]
 
-        let newUserJoined = false
+        let newUserName = ''
 
         messages.forEach((message, i) => {
             if (!message.username || !message.message) return
 
             if (message.type === 'join') {
-                if (!newUserJoined) {
+                if (message.username !== newUserName) {
                     newMessageComponents.push(
                         <div key={message.username + i} className="text-center text-gray-500">
                             <span className="text-xs">{message.username} has joined the chat</span>
                         </div>
                     )
-                    newUserJoined = true
+                    newUserName = message.username
                 }
                 return
             }
