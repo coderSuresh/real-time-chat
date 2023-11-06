@@ -12,6 +12,7 @@ const Header = ({ username }: Props) => {
 
     const logout = () => {
         sessionStorage.removeItem('username')
+        sessionStorage.removeItem('messages')
         router.push('/')
     }
 
